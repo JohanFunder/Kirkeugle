@@ -1,0 +1,39 @@
+---
+title: "Untitled"
+author: "Jonas Gehrlein"
+date: "15 jan 2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(R.utils)
+```
+First we load the two data frames 
+
+```{r}
+x <- file.path(directory,"/45067_11_01_20.csv")
+x <- read.csv(file=x, header= TRUE, sep = ',', dec = '.')
+str(x)
+(x)
+
+# Saml distance med oprideligt data
+t <- file.path(directory,"/DIST_45067.csv")
+t <- read.csv(file=t, header= TRUE, sep = ',', dec = '.')
+str(y)
+head(y)
+
+```
+
+We use the replace() function from r.utils which replaces our NA values
+with the values from the MEAS vector at the positions given by INDEX_FIX
+
+```{r}
+Meas <- rep(NA,length(x$Index_fix))
+at <-replace(x = Meas,list = t$INDEX_FIX, values = t$MEAS)
+
+z <- data.frame(x,at)
+
+View(z)
+```
+
