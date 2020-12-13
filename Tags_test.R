@@ -1,8 +1,9 @@
+
 # Set directory
 directory <- "D:/GIS_Kirkeugle"
 
-############# For første placering af katagorierne 21_11_19
-#Indlæs fil KAT 1
+############# For fÃ¸rste placering af katagorierne 21_11_19
+#IndlÃ¸s fil KAT 1
 Rep_1_KAT_1 <- read.csv(file=file.path(directory,"/45073_12_14_19_distance.csv")
                         , header= TRUE)
 
@@ -18,7 +19,7 @@ median(Rep_1_KAT_1$distance)
 
 
 
-#Indlæs fil KAT 3
+#IndlÃ¸s fil KAT 3
 Rep_1_KAT_3 <- read.csv(file=file.path(directory,"/45075_12_14_19_distance.csv")
                         , header= TRUE)
 
@@ -36,7 +37,7 @@ median(Rep_1_KAT_3$distance,na.rm = T)
 #definer KAT 2 med ekstra punkter
 Rep_1_KAT_2 <- rbind.data.frame(111.55,372.54,236.16,153.56)
 colnames(Rep_1_KAT_2) <- c('distance')
-# Definer KAT (Ingen punkter tilgængelige)
+# Definer KAT (Ingen punkter tilgÃ¸ngelige)
 Rep_1_KAT_4 <- data.frame(100)
 colnames(Rep_1_KAT_4) <- c('distance')
 
@@ -55,8 +56,8 @@ Rep_1$distance
 
 
 ######################### For anden placering af katagorierne 14_12_19
-#Indlæs fil KAT 1
-Rep_2_KAT_1 <- read.csv(file=file.path(directory,"/45069_12_21_19_distance.csv")
+#IndlÃ¸s fil KAT 1
+Rep_2_KAT_1 <- read.csv(file=file.path(directory,"/45069_12_21_19_distance.csv")   
                         , header= TRUE)
 
 str(Rep_2_KAT_1)
@@ -76,7 +77,7 @@ mean(Rep_2_KAT_2$distance)
 median(Rep_2_KAT_2$distance)
 
 
-#Indlæs fil KAT 3
+#IndlÃ¸s fil KAT 3
 Rep_2_KAT_3 <- read.csv(file=file.path(directory,"/45070_12_21_19_distance.csv")
                         , header= TRUE)
 
@@ -86,7 +87,7 @@ head(Rep_2_KAT_3)
 mean(Rep_2_KAT_3$distance)
 median(Rep_2_KAT_3$distance)
 
-#Indlæs fil KAT 4
+#IndlÃ¸s fil KAT 4
 Rep_2_KAT_4 <- read.csv(file=file.path(directory,"/45075_12_21_19_distance.csv")
                         , header= TRUE)
 
@@ -96,9 +97,9 @@ head(Rep_2_KAT_4)
 mean(Rep_2_KAT_4$distance)
 median(Rep_2_KAT_4$distance)
 
-# Tilføj værdier til 
-Rep_2_KAT_4_tilføj <- Rep_2_KAT_4$distance
-Rep_2_KAT_4 <- rbind((Rep_2_KAT_4_tilføj/100),778.56,500.43,76.67,704.56,297,34)
+# TilfÃ¸j vÃ¸rdier til 
+Rep_2_KAT_4_tilfÃ¸j <- Rep_2_KAT_4$distance
+Rep_2_KAT_4 <- rbind((Rep_2_KAT_4_tilfÃ¸j/100),778.56,500.43,76.67,704.56,297,34)
 Rep_2_KAT_4 <- data.frame(Rep_2_KAT_4)
 colnames(Rep_2_KAT_4) <- c('distance')
 str(Rep_2_KAT_4)
@@ -117,7 +118,7 @@ Rep_2$distance
 
 
 ########################## For tredje placering af katagorierne 11_01_20
-#Indlæs fil KAT 1
+#IndlÃ¸s fil KAT 1
 Rep_3_KAT_1 <- read.csv(file=file.path(directory,"/45069_21_03_20_distance.csv")
                         , header= TRUE)
 
@@ -138,8 +139,8 @@ mean(Rep_3_KAT_2$distance)
 median(Rep_3_KAT_2$distance)
 
 
-#Indlæs fil KAT 3
-Rep_3_KAT_3 <- read.csv(file=file.path(directory,"/45070_12_21_19_distance.csv")
+#IndlÃ¸s fil KAT 3
+Rep_3_KAT_3 <- read.csv(file=file.path(directory,"/45070_21_03_20_distance.csv")
                         , header= TRUE)
 
 str(Rep_3_KAT_3)
@@ -148,7 +149,7 @@ head(Rep_3_KAT_3)
 mean(Rep_3_KAT_3$distance)
 median(Rep_3_KAT_3$distance)
 
-#Indlæs fil KAT 4 (Ingen data tilgængelige)
+#IndlÃ¸s fil KAT 4 (Ingen data tilgÃ¸ngelige)
 Rep_3_KAT_4 <- data.frame(100)
 colnames(Rep_3_KAT_4) <- c('distance')
 
@@ -168,40 +169,42 @@ Rep_3$distance
 
 
 
-################################## Samlet grupperet barplot for alle gentagelser
-## Samlet først til et dataframe
+################################## Samlet grupperet boxplot/barplot for alle gentagelser
+#install.packages('ggpubr')
+library(ggpubr)
+## Samlet fÃ¸rst til et dataframe
 Rep_samlet <- rbind.data.frame(Rep_1,Rep_2,Rep_3)
 Rep_samlet[Rep_samlet == "-Inf"] <- NA
 Rep_samlet <- na.omit(Rep_samlet) 
 Rep_samlet$distance <-as.numeric(Rep_samlet$distance)
 
-## tilføj attributer for at kunne foretage statiske beregninger
-Rep_tilføj <- rbind.data.frame(c(1345,'KAT_4','Repeat_1'),c(1454,'KAT_4','Repeat_1'),c(1424,'KAT_4','Repeat_1'),
+## tilfÃ¸j attributer for at kunne foretage statiske beregninger
+Rep_tilfÃ¸j <- rbind.data.frame(c(1345,'KAT_4','Repeat_1'),c(1454,'KAT_4','Repeat_1'),c(1424,'KAT_4','Repeat_1'),
                     c(1540,'KAT_4','Repeat_3'),c(1244,'KAT_4','Repeat_3'),c(1424,'KAT_4','Repeat_3'))
 
-colnames(Rep_tilføj) <- c('distance','KAT','REP')
+colnames(Rep_tilfÃ¸j) <- c('distance','KAT','REP')
 
-Rep_samlet_tilføj <- rbind.data.frame(Rep_1,Rep_2,Rep_3,Rep_tilføj)
-Rep_samlet_tilføj[Rep_samlet_tilføj == "-Inf"] <- NA
-Rep_samlet_tilføj <- na.omit(Rep_samlet_tilføj) 
-Rep_samlet_tilføj$distance <-as.numeric(Rep_samlet_tilføj$distance)
+Rep_samlet_tilfÃ¸j <- rbind.data.frame(Rep_1,Rep_2,Rep_3,Rep_tilfÃ¸j)
+Rep_samlet_tilfÃ¸j[Rep_samlet_tilfÃ¸j == "-Inf"] <- NA
+Rep_samlet_tilfÃ¸j <- na.omit(Rep_samlet_tilfÃ¸j) 
+Rep_samlet_tilfÃ¸j$distance <-as.numeric(Rep_samlet_tilfÃ¸j$distance)
 
-Rep_samlet_tilføj <- Rep_samlet_tilføj[
-                      order( Rep_samlet_tilføj[,3], Rep_samlet_tilføj[,2] ),
+Rep_samlet_tilfÃ¸j <- Rep_samlet_tilfÃ¸j[
+                      order( Rep_samlet_tilfÃ¸j[,3], Rep_samlet_tilfÃ¸j[,2] ),
   ]
 
-Rep_samlet_tilføj <- droplevels(Rep_samlet_tilføj)
+Rep_samlet_tilfÃ¸j <- droplevels(Rep_samlet_tilfÃ¸j)
 
-Rep_samlet_tilføj
+Rep_samlet_tilfÃ¸j
 
 
 aggregate(formula = distance ~ REP + KAT,
-          data = Rep_samlet_tilføj,
+          data = Rep_samlet_tilfÃ¸j,
           FUN = length)
 
 ### Lav Shapiro-wilk med aggregate
 shap <- aggregate(formula = distance ~ REP + KAT,
-          data = Rep_samlet_tilføj,
+          data = Rep_samlet_tilfÃ¸j,
           FUN = function(x) {y <- shapiro.test(x); c(y$statistic, y$p.value)})
 
 options("scipen"=100, "digits"=4)
@@ -255,16 +258,16 @@ ggpar(q,legend.title = "Iterations")
 
 
 ##########################**************** Bootsrap Bca og barplot *********###############
-####### Prøv med bootstrap
+####### PrÃ¸v med bootstrap
 #install.packages('rcompanion')
 library('rcompanion')
 
-head(Rep_samlet_tilføj)
+head(Rep_samlet_tilfÃ¸j)
 #View(Rep_samlet)
 ## mean
 Rep_alle_mean_ci_boot <- groupwiseMean(
   formula = distance ~ REP + KAT,
-  data = Rep_samlet_tilføj,
+  data = Rep_samlet_tilfÃ¸j,
   var = "distance",
   group = c("REP","KAT"),
   conf = 0.95,
@@ -283,7 +286,7 @@ Rep_alle_mean_ci_boot
 ###median
 Rep_alle_median_ci_boot <- groupwiseMedian(
   formula = distance ~ REP + KAT,
-  data = Rep_samlet_tilføj,
+  data = Rep_samlet_tilfÃ¸j,
   var = "distance",
   group = c("REP","KAT"),
   conf = 0.95,
@@ -300,8 +303,10 @@ str(Rep_alle_median_ci_boot)
 Rep_alle_median_ci_boot[c(2:5,13:14)]
 
 
-
 ######## Barplot SAMLET MED SAMMENLIGNINGER
+#install.packages('ggplot2')
+#install.packages('dplyr')
+#install.packages('ggpmisc')
 library(ggplot2)
 library(dplyr)
 library(ggpmisc)
@@ -328,7 +333,7 @@ ggplot(Rep_alle_mean_ci_boot, aes(x=KAT, y=Boot.mean, fill=REP, width )) +
         axis.title=element_text(size = 15)) +
   #  scale_y_continuous(limits=c(0,800),breaks=seq(0,800,50)) +
   
-  # Tilføj signifikansniveauer  
+  # TilfÃ¸j signifikansniveauer  
   geom_signif(comparisons = list(c("KAT_1", "KAT_2")), size = 0.7,
               map_signif_level=TRUE,test = "wilcox.test",y_position = 600) +
   geom_signif(comparisons = list(c("KAT_3", "KAT_2")), size = 0.7,
@@ -367,7 +372,7 @@ ggplot(Rep_alle_median_ci_boot, aes(x=KAT, y=Boot.median, fill=REP, width )) +
         axis.title=element_text(size = 15)) +
   scale_y_continuous(limits=c(0,800),breaks=seq(0,800,100)) +
   
-  # Tilføj signifikansniveauer  
+  # TilfÃ¸j signifikansniveauer  
   geom_signif(comparisons = list(c("KAT_1", "KAT_2")), size = 0.7,
               map_signif_level=TRUE,test = "wilcox.test",y_position = 600) +
   geom_signif(comparisons = list(c("KAT_3", "KAT_2")), size = 0.7,
