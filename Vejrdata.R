@@ -103,11 +103,11 @@ head(regn,100)
 original_date <- as.POSIXct(temp$DateTime, format="%m/%d/%Y %H:%M:%S") 
 temp$original_date <- original_date
 
-##### Udvælg ønskede datoer
+##### UdvÃ¦lg Ã¸nskede datoer
 temp <- temp[temp$original_date >= "2019-06-15" & temp$original_date <= "2020-05-15",]
 str(temp)
 
-###### Indføj manglende datoer
+###### IndfÃ¸j manglende datoer
 library(padr)
 temp <- data.frame(pad(temp,by = "original_date"))
 str(temp)
@@ -117,7 +117,7 @@ temp$Date <- format(temp$original_date, "%d.%b")
 head(temp,15)
 tail(temp,15)
 
-##### Udvælg rigtige intries med 14. dages intervaller
+##### UdvÃ¦lg rigtige intries med 14. dages intervaller
 temp$ID <- seq_along(temp[,1])
 temp[,1]
 # indexer i rigtige levels
@@ -161,11 +161,11 @@ mtext('Unge 1', side = 3, line = -1.5, outer = FALSE, at = 19,
 original_date <- as.POSIXct(vind$DateTime, format="%m/%d/%Y %H:%M:%S") 
 vind$original_date <- original_date
 
-##### Udvælg ønskede datoer
+##### UdvÃ¦lg Ã¸nskede datoer
 vind <- vind[vind$original_date >= "2019-06-15" & vind$original_date <= "2020-05-15",]
 str(vind)
 
-###### Indføj manglende datoer
+###### IndfÃ¸j manglende datoer
 library(padr)
 vind <- data.frame(pad(vind,by = "original_date"))
 str(vind)
@@ -175,7 +175,7 @@ vind$Date <- format(vind$original_date, "%d.%b")
 head(vind,15)
 tail(vind,15)
 
-##### Udvælg rigtige intries med 14. dages intervaller
+##### UdvÃ¦lg rigtige intries med 14. dages intervaller
 vind$ID <- seq_along(vind[,1])
 vind[,1]
 # indexer i rigtige levels
@@ -219,11 +219,11 @@ mtext('Unge 1', side = 3, line = -1.5, outer = FALSE, at = 19,
 original_date <- as.POSIXct(regn$DateTime, format="%m/%d/%Y %H:%M:%S") 
 regn$original_date <- original_date
 
-##### Udvælg ønskede datoer
+##### UdvÃ¦lg Ã¸nskede datoer
 regn <- regn[regn$original_date >= "2019-06-15" & regn$original_date <= "2020-05-15",]
 str(regn)
 
-###### Indføj manglende datoer
+###### IndfÃ¸j manglende datoer
 library(padr)
 regn <- data.frame(pad(regn,by = "original_date"))
 str(regn)
@@ -233,7 +233,7 @@ regn$Date <- format(regn$original_date, "%d.%b")
 head(regn,15)
 tail(regn,15)
 
-##### Udvælg rigtige intries med 14. dages intervaller
+##### UdvÃ¦lg rigtige intries med 14. dages intervaller
 regn$ID <- seq_along(regn[,1])
 regn[,1]
 # indexer i rigtige levels
@@ -260,7 +260,7 @@ trim_dates
 ## Plot at mod Date
 dato <- regn$DateTime
 dato
-regn_plot <- regn$Nedbør
+regn_plot <- regn$NedbÃ¸r
 # View(z_45067$at)
 
 plot.default(dato, regn_plot, xaxt ='n', xlab = '', type = 'p',pch = 19,

@@ -169,7 +169,7 @@ Rep_3$distance
 
 
 
-################################## Samlet grupperet boxplot/barplot for alle gentagelser
+################################## Samlet grupperet boxplot for alle gentagelser
 #install.packages('ggpubr')
 library(ggpubr)
 ## Samlet først til et dataframe
@@ -212,7 +212,7 @@ print(shap$distance[,2], scientific=FALSE)
 
 
 library(ggpubr)
-
+Rep_samlet
 ## Definer names of break lines
 names <- c('Fully exposed=(1)',' Tree-foilage=(2)',
            'Outside on=buildings=(3)','Inside=buildings=(4)')
@@ -290,7 +290,7 @@ Rep_alle_median_ci_boot <- groupwiseMedian(
   var = "distance",
   group = c("REP","KAT"),
   conf = 0.95,
-  R = 1000,
+  R = 10000,
   boot = TRUE,
   normal = TRUE,
   basic = TRUE,
@@ -300,6 +300,7 @@ Rep_alle_median_ci_boot <- groupwiseMedian(
 )
 
 str(Rep_alle_median_ci_boot)
+#View(Rep_alle_median_ci_boot)
 Rep_alle_median_ci_boot[c(2:5,13:14)]
 
 

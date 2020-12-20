@@ -1,13 +1,13 @@
 str(z_samlet_vejr)
 #View(z_samlet_vejr)
 
-# trim entries væk hvor value mindre end forrige row entri
+# trim entries vÃ¦k hvor value mindre end forrige row entri
 nrow(z_samlet_vejr)
 z_samlet_vejr <- z_samlet_vejr[z_samlet_vejr$dist_dag != 0,]
 
 
 
-### Lav ggplot over kumuleret bevægelse for alle ugler samlet
+### Lav ggplot over kumuleret bevÃ¦gelse for alle ugler samlet
 library(ggplot2)
 library(scales)
 
@@ -24,7 +24,8 @@ ggplot() +
             position = position_nudge(x = 1.3),
             show.legend = T,na.rm = T) + 
   
-  scale_colour_manual(values=c("45067"="black","45068"="navyblue","45072"="green4","45076"="red4"),
+  scale_colour_manual(values=c("45067"="black","45068"="navyblue","45069"="grey50",
+                               "45072"="green4","45074"="grey30","45076"="red4"),
                       name="GPS-tag number") +
   
   scale_x_date(breaks = seq(as.Date("2019-06-15"), as.Date("2020-05-05"), by="1 weeks"),

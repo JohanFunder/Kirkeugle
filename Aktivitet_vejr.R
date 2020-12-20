@@ -4,24 +4,29 @@ str(z_samlet)
 tail(z_45076$FIX.date,2000)
 str(vejr.data)
 
-## Saml først hver ugle med vejrdata
+## Saml fÃ¸rst hver ugle med vejrdata
 # 45067
 z_45067.vejr <- cbind.data.frame(z_45067,vejr.data)
 # 45068
 z_45068.vejr <- cbind.data.frame(z_45068,vejr.data)
+# 45069
+z_45069.vejr <- cbind.data.frame(z_45069,vejr.data)
 # 45072
 z_45072.vejr <- cbind.data.frame(z_45072,vejr.data)
+# 45074
+z_45074.vejr <- cbind.data.frame(z_45074,vejr.data)
 # 45076
 z_45076.vejr <- cbind.data.frame(z_45076,vejr.data)
 
 ## Saml nu alle ugler og alle vejrdata
-z_samlet_vejr.1 <- rbind.data.frame(z_45067.vejr,z_45068.vejr,z_45072.vejr,z_45076.vejr)
+z_samlet_vejr.1 <- rbind.data.frame(z_45067.vejr,z_45068.vejr,z_45069.vejr,
+                                    z_45072.vejr,z_45074.vejr,z_45076.vejr)
 str(z_samlet_vejr.1)
 #View(z_samlet_vejr.1)
 head(z_samlet_vejr.1$RTC.date,1000)
 
 
-#### TIlføj kolonne med GPS-Koordinater for Fræer
+#### TIlfÃ¸j kolonne med GPS-Koordinater for FrÃ¦er
 z_samlet_vejr.1$LAT <- c("56.863996")
 z_samlet_vejr.1$LON <- c("9.935008")
 #View(z_samlet_vejr.1)
@@ -75,8 +80,8 @@ head(z_samlet_vejr)
 
 
 
-#####*** Indsæt SUNSET
-## Prøv først med data eksempel fra motus
+#####*** IndsÃ¦t SUNSET
+## PrÃ¸v fÃ¸rst med data eksempel fra motus
 # timeToSunriset(df.alltags_brug, lat = "recvDeployLat", lon = "recvDeployLon",
 #               ts = "ts", units = "hours")
 
@@ -167,17 +172,17 @@ str(aggr_vind)
 
 ##*** regn
 ### Udregn mean values
-z_samlet_vejr$Nedbør
-aggr_regn <- aggregate(z_samlet_vejr["Nedbør"],
+z_samlet_vejr$NedbÃ¸r
+aggr_regn <- aggregate(z_samlet_vejr["NedbÃ¸r"],
                        by = z_samlet_vejr[c("cuts", "day.night")],
                        FUN=sum, na.rm=TRUE)
 
-# fjern overflødlige kolonner
+# fjern overflÃ¸dlige kolonner
 aggr_regn <- aggr_regn[-c(1, 48, 97), ]
 
-## tilføj kolonne med color
-#aggr_regn$color <- c(rep("red4",length(aggr_regn$Nedbør)/2),
-#                     rep("navyblue",length(aggr_regn$Nedbør)/2))
+## tilfÃ¸j kolonne med color
+#aggr_regn$color <- c(rep("red4",length(aggr_regn$NedbÃ¸r)/2),
+#                     rep("navyblue",length(aggr_regn$NedbÃ¸r)/2))
 aggr_regn
 
 
@@ -332,8 +337,8 @@ ggplot() + ylim(0,2800) +
   ## Barplot regn
   ## Barplot for dags regn
   geom_tile(aes(x = as.Date(aggr_regn$cuts[aggr_regn$day.night == "Day"]),
-                y = ((-1*(aggr_regn$Nedbør[aggr_regn$day.night == "Day"])*10)/2)+3500, # y = the center point of each bar
-                height = aggr_regn$Nedbør[aggr_regn$day.night == "Day"]*10,
+                y = ((-1*(aggr_regn$NedbÃ¸r[aggr_regn$day.night == "Day"])*10)/2)+3500, # y = the center point of each bar
+                height = aggr_regn$NedbÃ¸r[aggr_regn$day.night == "Day"]*10,
                 fill = "red4",),
             alpha = 1/2,
             width = 1.7,
@@ -344,8 +349,8 @@ ggplot() + ylim(0,2800) +
   
   ## Barplot for nats regn
   geom_tile(aes(x = as.Date(aggr_regn$cuts[aggr_regn$day.night == "Night"]),
-                y = ((-1*(aggr_regn$Nedbør[aggr_regn$day.night == "Night"])*10)/2)+3500, # y = the center point of each bar
-                height = aggr_regn$Nedbør[aggr_regn$day.night == "Night"]*10,
+                y = ((-1*(aggr_regn$NedbÃ¸r[aggr_regn$day.night == "Night"])*10)/2)+3500, # y = the center point of each bar
+                height = aggr_regn$NedbÃ¸r[aggr_regn$day.night == "Night"]*10,
                 fill = "navyblue"),
             alpha = 1/2,
             width = 1.7,
@@ -359,7 +364,7 @@ ggplot() + ylim(0,2800) +
   
 
 #  geom_line(data = aggr_regn, aes(x = as.Date(cuts), 
-#                                  y = (Nedbør*-1)*10+3000,
+#                                  y = (NedbÃ¸r*-1)*10+3000,
 #                                  color = day.night),
 #            size = 0.75,
 #            inherit.aes = F,
@@ -413,7 +418,7 @@ ggplot() + ylim(0,2800) +
                 width=4.1, position = position_nudge(x = 1.3),size=0.7) + 
   
   geom_line(mapping = aes(x = as.Date(z_samlet_vejr$original_date), 
-                          y = (z_samlet_vejr$Nedbør*-1)*70+2700),
+                          y = (z_samlet_vejr$NedbÃ¸r*-1)*70+2700),
             size = 0.5, color = "navyblue",inherit.aes = F) +
   
   
