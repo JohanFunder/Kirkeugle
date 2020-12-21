@@ -224,7 +224,7 @@ ggplot() + ylim(0,2800) +
                labels = date_format(format = "%d. %b"), expand = c(0.01,0.01),
                limits = c(as.Date("2019-06-15"),as.Date("2020-05-02"))) +
 
-   theme_bw() +
+  theme_bw() +
   theme(text = element_text(size=15),
         axis.text.y = element_text(face="bold"),
         axis.text.y.right = element_text(face="bold",color='navyblue'),
