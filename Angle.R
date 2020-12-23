@@ -76,7 +76,7 @@ ggplot()  + ylim(-2300,4000) +
 
 
 ## Plot for KUMMULERET 
-ggplot()  + ylim(0,150) +
+ggplot()  + ylim(0,250) +
   
   geom_bar(data=angle, mapping = aes(x=cuts),
            stat = "count",fill = "lightgrey",colour="black",width = 0.9,
@@ -203,14 +203,14 @@ ggplot(angle_boot_mean, aes(x=heading, y=Boot.mean, fill=id)) +
   theme_bw() +
   theme(legend.text=element_text(size=13),legend.title=element_text(size=15),
         axis.text=element_text(size=13),
-        axis.title=element_text(size = 15)) +
+        axis.title=element_text(size = 15)) 
   #  scale_y_continuous(limits=c(0,800),breaks=seq(0,800,50)) 
   
   # Tilføj signifikansniveauer  
   geom_signif(comparisons = list(c("North", "East")), size = 0.7,
               map_signif_level=TRUE,test = "wilcox.test",y_position = 4000) +
-  geom_signif(comparisons = list(c("KAT_3", "KAT_2")), size = 0.7,
-              map_signif_level=TRUE,test = "wilcox.test",y_position = 650) +
+  geom_signif(comparisons = list(c("East", "South")), size = 0.7,
+              map_signif_level=TRUE,test = "wilcox.test",y_position = 4400) +
   geom_signif(comparisons = list(c("KAT_1", "KAT_3")), size = 0.7,
               map_signif_level=TRUE,test = "wilcox.test",y_position = 750) +
   geom_signif(comparisons = list(c("KAT_3", "KAT_4")), size = 0.7,
@@ -225,28 +225,28 @@ ggplot(angle_boot_mean, aes(x=heading, y=Boot.mean, fill=id)) +
 ############ Median
 library(ggsignif)
 
-ggplot(angle_boot_median, aes(x=cuts, y=Boot.median, fill=id)) + 
-  geom_bar(position=position_dodge(width = .8), stat="identity",
-           colour="black", # Use black outlines,
-           size=.5, width = .6) +      # Thinner lines) +
-  geom_errorbar(aes(ymin=Bca.lower, ymax=Bca.upper),
-                width=.2,                    # Width of the error bars
-                position=position_dodge(.8)) +
-  xlab("Heading") +
-  ylab("Mean distance per movement (m)") +
-  scale_fill_manual(values = c("white",'lightgrey','grey45','grey25'),
-                    name="Individuals", # Legend label, use darker colors
-                    breaks=c("45067", "45068","45072","45076"),
-                    labels=c("First","Second",
-                             "Third","Fourth")) +
-  
-  scale_x_discrete(breaks=unique(angle_aggr$heading),
-                   labels=addline_format(angle_aggr$heading)) +
-  
-  theme_bw() +
-  theme(legend.text=element_text(size=13),legend.title=element_text(size=15),
-        axis.text=element_text(size=13),
-        axis.title=element_text(size = 15))
+  ggplot(angle_boot_median, aes(x=heading, y=Boot.median, fill=id)) + 
+    geom_bar(position=position_dodge(width = .8), stat="identity",
+             colour="black", # Use black outlines,
+             size=.5, width = .6) +      # Thinner lines) +
+    geom_errorbar(aes(ymin=Bca.lower, ymax=Bca.upper),
+                  width=.2,                    # Width of the error bars
+                  position=position_dodge(.8)) +
+    xlab("Heading") +
+    ylab("Mean distance per movement (m)") +
+    scale_fill_manual(values = c("white",'lightgrey','grey45','grey25'),
+                      name="Individuals", # Legend label, use darker colors
+                      breaks=c("45067", "45068","45072","45076"),
+                      labels=c("First","Second",
+                               "Third","Fourth")) +
+    
+    scale_x_discrete(breaks=unique(angle_aggr$heading),
+                     labels=addline_format(angle_aggr$heading)) +
+    
+    theme_bw() +
+    theme(legend.text=element_text(size=13),legend.title=element_text(size=15),
+          axis.text=element_text(size=13),
+          axis.title=element_text(size = 15)) 
   #  scale_y_continuous(limits=c(0,800),breaks=seq(0,800,50)) 
   
   # Tilføj signifikansniveauer  
